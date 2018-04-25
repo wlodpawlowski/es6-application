@@ -118,3 +118,16 @@ const arr2 = ['c', 'd', 'e', 'f', 'g'];
 
 arr1.push(...arr2);
 console.log(arr1);
+
+//11. Callable entities:
+
+//11.1 Access the value of of this in some other way:
+var $button = $('#first-btn');
+$button.on('click', function() {
+  this.classList.toggle('clicked');
+});
+
+var $button2 = $('#second-btn');
+$button2.on('click', event => {
+  event.target.classList.toggle('clicked');
+});
