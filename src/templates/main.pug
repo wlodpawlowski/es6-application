@@ -4,8 +4,12 @@ html(lang='en')
     // Required meta tags
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    link(rel='stylesheet', href='../sass/main.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
     title ES6 App
   body
-    h2 Console ES6 Application for deep learning
-
+    main
+      h2 Console ES6 Application for deep learning
+      button(class='test-buttons', id='first-btn') First button
+      button(class='test-buttons', id='second-btn') Second button
     script(src='../js/main.js')
