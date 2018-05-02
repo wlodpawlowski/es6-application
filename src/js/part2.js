@@ -180,5 +180,20 @@ export function part2_function() {
     }
 
     realFunction();
+    
+    //13. New OOP features in the ES6:
+
+    //13.1 New method assign()
+    const testObject = {
+      A: 'first',
+      B: 'second',
+      C: 'third'
+    }
+    Object.assign(testObject, {
+      D: 'fourth',
+      E: 'fifth',
+      F: 'sixth'
+    });
+    console.log(JSON.stringify(testObject));
   });
 }
