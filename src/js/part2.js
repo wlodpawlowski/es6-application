@@ -196,4 +196,35 @@ export function part2_function() {
     });
     console.log(JSON.stringify(testObject));
   });
+  
+  //13.2 Adding methods to the object:
+  class someClass {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+
+  console.log(someClass);
+
+  Object.assign(someClass.prototype, {
+    firstMethod(ar1, ar2) {
+      console.log(`${ar1} : ${ar2}`);
+    },
+    secondMethod() {
+    }
+  });
+
+  console.log(someClass);
+
+  //13.3 More precisely operator Object.is() for comparing properties:
+  console.log(Object.is(NaN, NaN));
+  console.log(Object.is(-0, +0));
+
+  //13.4 Using Object.is() instead indexOf() method for more precisely searching elements of arrays:
+  function myIndexOf(arr, elem) {
+    return arr.findIndex(x => Object.is(x, elem));
+  }
+
+  console.log(myIndexOf([4.25, 2.46, 9.35, 0.42, NaN, -0, 35], NaN));
 }
