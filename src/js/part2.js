@@ -43,5 +43,20 @@ export function part2_function() {
     for (let i in attr_obj) {
       console.log(Object.getOwnPropertyDescriptor(attr_obj, i));
     }
+
+    //13.3 Using toJSON method for JSON.stringify method initializing:
+    const testObject = {
+      A : 'X',
+      B : 'Y',
+      toJSON() {
+        return {
+          C : 'Z',
+          D : 'E',
+          E : 'F'
+        }
+      },
+      F : 'W'
+    }
+    console.log(JSON.stringify(testObject));
   });
 }
