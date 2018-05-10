@@ -58,5 +58,16 @@ export function part2_function() {
       F : 'W'
     }
     console.log(JSON.stringify(testObject));
+
+    //14.1 Using old Object.prototype.toString() for returning value of type:
+    console.log(Object.prototype.toString.call(null));
+    console.log(Object.prototype.toString.call([]));
+    console.log(Object.prototype.toString.call({}));
+    console.log(Object.prototype.toString.call(Object.create(null)));
+
+    //14.2 Checking out type of different objects:
+    console.log(JSON[Symbol.toStringTag]);
+    console.log(Map.prototype[Symbol.toStringTag]);
+    console.log(Math[Symbol.toStringTag]);
   });
 }
