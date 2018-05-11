@@ -69,5 +69,87 @@ export function part2_function() {
     console.log(JSON[Symbol.toStringTag]);
     console.log(Map.prototype[Symbol.toStringTag]);
     console.log(Math[Symbol.toStringTag]);
+    
+    //14. Classes in the ES6:
+
+    //14.1 Creation a new standart class in the ES6:
+    class Point {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+      }
+      toString() {
+        return `(${this.x}, ${this.y})`;
+      }
+    }
+
+    class ColorPoint extends Point {
+      constructor(x, y, color) {
+        super(x, y);
+        this.color = color;
+      }
+      toString() {
+        return super.toString() + ' in ' + this.color;
+      }
+    }
+
+    //Assigning new classes:
+    const cp = new ColorPoint(8.24, 56.15, 'purple');
+    console.log(cp.toString());
+    console.log(cp instanceof ColorPoint);
+    console.log(cp instanceof Point);
+
+    //14.2 Class expressions:
+    const MyClass = class Me {
+      getClassName() {
+        return Me.name;
+      }
+    }
+
+    const inst = new MyClass;
+    console.log(inst.getClassName());
+
+    //14.3 Using getters and setters:
+    class getSetClass {
+      get prop() {
+        return 'getter';
+      }
+      set prop(value) {
+        console.log('setter: ' + value);
+      }
+    }
+
+    const instClass = new getSetClass();
+    console.log(instClass.prop = 'data');
+    instClass.prop;
+
+    //14.4 Using generator methods:
+    class IterableArguments {
+      constructor(...args) {
+        this.args = args;
+      }
+      * [Symbol.iterator]() {
+        for (const arg of this.args) {
+          yield arg;
+        }
+      }
+    }
+
+    for (const x of new IterableArguments('A', 'B', 'C', 'D', 'E')) {
+      console.log(x);
+    }
+
+    //14.5 Using subclassing build-in constructors:
+    class Stack extends Array {
+      get top() {
+        return this[this.length - 1];
+      }
+    }
+
+    let stack = new Stack();
+    stack.push('world');
+    stack.push('hello');
+    console.log(stack.top);
+    console.log(stack.length);
   });
 }
