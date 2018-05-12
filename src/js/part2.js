@@ -151,5 +151,25 @@ export function part2_function() {
     stack.push('hello');
     console.log(stack.top);
     console.log(stack.length);
+    
+    //14.3 Private data of class - using constructor():
+    class Countdown {
+      constructor(counter, action) {
+        Object.assign(this, {
+          dec() {
+            if (counter < 1) return;
+            counter--;
+            if (counter == 0) {
+              action();
+            }
+          }
+        });
+      }
+    }
+
+    const countDown = new Countdown(3, () => console.log('YEP!'));
+    for(let i = 0; i < 3; i++) {
+      countDown.dec();
+    }
   });
 }
