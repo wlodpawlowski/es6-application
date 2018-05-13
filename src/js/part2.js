@@ -171,5 +171,38 @@ export function part2_function() {
     for(let i = 0; i < 3; i++) {
       countDown.dec();
     }
+    
+    //14.4 Private data with Symbol keys:
+    const _counter = Symbol('counter');
+    const _action = Symbol('action');
+
+    class Countdown2 {
+      constructor(counter, action) {
+        this[_counter] = counter;
+        this[_action] = action;
+      }
+
+      dec() {
+        if (this[_counter] < 1) return;
+        this[_counter]--;
+        if (this[_counter] == 0) {
+          this[_action]();
+        }
+      }
+    }
+
+    const symbolData = new Countdown2(3, () => console.log('DONE!'));
+    console.log(Object.keys(symbolData));
+    console.log(Reflect.ownKeys(symbolData));
+
+    //14.5 The inner names of function:
+    const fac = function me(n) {
+    if (n > 0) {
+      return n * me(n-1);
+    } else {
+      return 1;
+    }
+  };
+  console.log(fac(3));
   });
 }
