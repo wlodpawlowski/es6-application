@@ -204,5 +204,32 @@ export function part2_function() {
     }
   };
   console.log(fac(3));
+    
+  //15.1 Using species pattern for declaring constructors:
+  function isObject(value) {
+    return (value !== null && (typeof value === 'object' || typeof value === 'function'));
+  }
+
+  function isConstructor(x) {
+    //...
+  }
+
+  function SpeciesContructor(O, defaultConstructor) {
+    const C = O.contructor;
+    if (C == undefined) {
+      return defaultConstructor;
+    }
+    if (!isObject(C)) {
+      throw new TypeError();
+    }
+    const S = C[Symbol.species];
+    if (S === undefined || S === null) {
+      return defaultConstructor;
+    }
+    if (!isConstructor(S)) {
+      throw new TypeError();
+    }
+    return S;
+  }
   });
 }
