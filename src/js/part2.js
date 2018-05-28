@@ -448,4 +448,45 @@ requirejs(["modules/trygonometric", "modules/output"], function() {
       console.log('Promises were called!');
       for (let i = 1; i <= 3; i++)
         console.log(Module`${i}`);
+    
+  //16. For-of loop construction in the ES6:
+
+  //16.1 Simple example:
+  const aircrafts = [
+    'Helicopters',
+    'Autogyros',
+    'Glider',
+    '',
+    'Airplanes'
+  ];
+  for(const x of aircrafts) {
+    if (x.length === 0) break;
+    console.log(x);
+  }
+
+  //16.2 Using destructuring for iterating over elements of array:
+  const space_stations = [
+    'Salyut 1',
+    'Skylab',
+    'Kosmos 557',
+    'International Space Station',
+    'Tiangong 1',
+    'Mir'
+  ];
+  for (const [order, station] of space_stations.entries()) {
+    console.log(`${order}: ${station}`);
+  }
+
+  //16.3 Using destructuring for iterating over elements of map:
+  const ss_history = new Map([
+    ['Salyut 1', 'USSR', '1971'],
+    ['Skylab', 'USA', '1973-1979'],
+    ['Kosmos 557', 'USSR', '1973'],
+    ['International Space Station', 'USA, Russia, Canada, EU, Japan'],
+    ['Tiangong 1', 'China', '2011-2018'],
+    ['Mir', 'USSR-Russia', '1986-2000']
+  ]);
+  for (const [station, country, year] of ss_history) {
+    console.log(`${station} - ${country} - ${year}`);
+  }
     });
