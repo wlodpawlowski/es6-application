@@ -489,4 +489,48 @@ requirejs(["modules/trygonometric", "modules/output"], function() {
   for (const [station, country, year] of ss_history) {
     console.log(`${station} - ${country} - ${year}`);
   }
+    
+    //16.4 Using Array.from() for iterating over array-like object:
+  const arrayLike = {
+    0: 'A',
+    1: 'B',
+    2: 'C',
+    3: 'D'
+  }
+
+  for (const x of Array.from(arrayLike)) {
+    console.log(x) //It is works fine, because we use Array.from()
+  }
+
+  //16.5 Testing simple pushing element to the array using for...of...
+  const pushArray = [];
+  for (const elem of [5.24, 2.42, 9.95, 7.42, 5.66]) {
+    pushArray.push(() => elem);
+  }
+  console.log(pushArray.map(f => f()));
+
+  //16.6 Testing a destructuring pattern for iterating:
+  const desArr = ['first', 'second', 'third', 'fourth'];
+  for (const [k, v] of desArr.entries()) {
+    console.log(`key = ${k}, value = ${v}`);
+  }
+
+  //16.7 Testing basic iterating methods for arrays:
+  console.log(Array.from(['a', 'b', 'c', 'd', 'e'].keys()));
+  console.log(Array.from([3.24, 2.53, 8.53, 4.63, 2.42].values()));
+  console.log(Array.from(['FE', 'SE', 'TE', 'FE'].entries()));
+
+  //16.8 Searching elements in the array:
+  console.log([0.24, 5.25, 3.42].find(x => (x/10) > 0.5));
+  console.log([53, 81, 32, 44, 0].findIndex(x => (x%2) == 0));
+
+  //16.9 Testing a new method CopyWithin() for arrays:
+  const testArr = [4, 7, 3, 5, 2, 1, 0];
+  console.log(testArr.copyWithin(4, 2, 3));
+
+  //16.10 Filling array with the given value:
+  let fillArr = ['NOT OK', '--', '--', '--', '--', 'NOT OK'];
+  console.log(fillArr);
+  fillArr.fill('OK', 1, 5);
+  console.log(fillArr);
     });
