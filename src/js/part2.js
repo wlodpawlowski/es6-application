@@ -533,4 +533,75 @@ requirejs(["modules/trygonometric", "modules/output"], function() {
   console.log(fillArr);
   fillArr.fill('OK', 1, 5);
   console.log(fillArr);
+    
+  //16.11 Filling array with computed values:
+  console.log(Array.from(new Array(7), (x, i) => i*1.42));
+
+  //16.12 Avoiding default spreading arrays:
+  const arr_A = ['A', 'B', 'C', 'D'];
+  arr_A[Symbol.isConcatSpreadable] = false;
+  console.log(['E', 'F', 'G', 'H'].concat(arr_A, 'K', 'L'));
+
+  //17. Maps & Sets:
+
+  //17.1 Default initializing method for Maps:
+  console.log('Map Section:');
+  const map_1 = new Map();
+  const key_1 = {};
+
+  map_1.set(key_1, 53.66);
+  console.log(map_1.get(key_1));
+  console.log(map_1.has(key_1));
+  map_1.delete(key_1);
+  console.log(map_1.has(key_1));
+
+  //17.2 Initializing Map with [key, values] pairs methods:
+  const map_2 = new Map([
+    [0, 'first'],
+    [1, 'second'],
+    [2, 'third'],
+    [3, 'fourth']
+  ]);
+  console.log(map_2);
+
+  //17.3 Initializing Set():
+  const f_arr = [2, 3, 2, 5, 7, 3, 0, 7, 7, 3, 1, 9, 9];
+  const unique = [...new Set(f_arr)];
+  console.log('Unique set of elements:');
+  console.log(unique);
+
+  //17.4 Using WeakMap() for associating data with objects:
+  const _objToListeners = new WeakMap();
+
+  function addListener(obj, listener) {
+    if (! _objToListeners.has(obj)) {
+      _objToListeners.set(obj, new Set());
+    }
+    _objToListeners.get(obj).add(listener);
+  }
+
+  function triggerListeners(obj) {
+    const listeners = _objToListeners.get(obj);
+    if (listeners) {
+      for (const listener of listeners) {
+        listener();
+      }
+    }
+  }
+
+  const obj = {};
+  addListener(obj, () => console.log('Hello!'));
+  addListener(obj, () => console.log('My dear world!'));
+  addListener(obj, () => console.log('How are you ?'));
+
+  triggerListeners(obj);
+
+  //17.5 Determining size of map with values:
+  const det_map = new Map();
+  det_map.set('first_data', true);
+  det_map.set('second_data', false);
+  det_map.set('third_data', true);
+  console.log(det_map.size);
+  det_map.clear();
+  console.log(det_map.size);
     });
