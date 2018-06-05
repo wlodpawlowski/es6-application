@@ -604,4 +604,82 @@ requirejs(["modules/trygonometric", "modules/output"], function() {
   console.log(det_map.size);
   det_map.clear();
   console.log(det_map.size);
+    
+  //17.6 Iterating over Map() entries:
+  const iterate_map = new Map([
+    [false, 'no'],
+    [true, 'yes'],
+    [true, 'yes'], 
+    [false, 'no'],
+  ]);
+
+  for (const entry of iterate_map) {
+    console.log(entry[0], entry[1]);
+  }
+
+  //17.7 Shorter destructuring method for iterating:
+  const sh_map = new Map([
+    [0, 'first_pilot'],
+    [1, 'second_pilot'],
+    [2, 'third_pilot']
+  ]);
+
+  for (const [key, value] of sh_map) {
+    console.log(`${key} : ${value}`);
+  }
+
+  //17.8 Using standart forEach method for iterating:
+  sh_map.forEach((value, key) => {
+    console.log(key, value);
+  });
+
+  //17.9 Mapping a map with 3-steps method:
+  const mappedMap = new Map(
+    [...sh_map].map(([k, v]) => [k * 3.45, '_/' + v])
+  );
+  console.log(mappedMap);
+
+  //17.10 Filtering a map with 3-steps method:
+  const filteredMap = new Map(
+    [...sh_map].filter(([k, v]) => k < 2)
+  );
+  console.log(filteredMap);
+
+  //17.11 Combining different maps:
+  const combinedMap = new Map([...iterate_map, ...sh_map]);
+  console.log(combinedMap);
+
+  //17.12 The conversion to and from JSON:
+  function mapToJson(myMap) {
+    return JSON.stringify([...myMap]);
+  }
+
+  function jsonToMap(myJSON) {
+    return new Map(JSON.parse(myJSON));
+  }
+
+  const conv_map = new Map().set(true, 7).set({first: 5, second: 8, third: 10}, ['abc']);
+  console.log(mapToJson(conv_map));
+  console.log(jsonToMap('[[true,7],[{"foo":3},["abc"]]]'));
+
+  //17.13 Implementing functions for converting string Maps to or from objects:
+  function strMapToObj(strMap) {
+    const obj = Object.create(null);
+    for (const [k,v] of strMap) {
+      obj[k] = v;
+    }
+    return obj;
+  }
+
+  function objToStrMap(obj) {
+    const strMap = new Map();
+    for (const k of Object.keys(obj)) {
+      strMap.set(k, obj[k]);
+    }
+    return strMap;
+  }
+
+  const str_map = new Map().set('yes', true).set('no', false);
+  console.log(strMapToObj(str_map));
+  console.log(objToStrMap({yes: true, no: false}));
     });
