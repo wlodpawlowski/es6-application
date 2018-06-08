@@ -683,3 +683,27 @@ requirejs(["modules/trygonometric", "modules/output"], function() {
   console.log(strMapToObj(str_map));
   console.log(objToStrMap({yes: true, no: false}));
     });
+
+  //17.14 Implementing WeakMap() function for caching previous results:
+  const cache = new WeakMap();
+  function countOwnKeys(obj) {
+    if (cache.has(obj)) {
+      console.log('Cached!');
+      return cache.get(obj);
+    } else {
+      console.log('Computed!');
+      const count = Object.keys(obj).length;
+      cache.set(obj, count);
+      return count;
+    }
+  }
+
+  const weak_obj = {
+    country: 'USA',
+    population: 350000000,
+    economics: '1th',
+    GDP: '$21 trillion'
+  }
+
+  countOwnKeys(weak_obj);
+  countOwnKeys(weak_obj);
