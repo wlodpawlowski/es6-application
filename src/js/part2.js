@@ -707,3 +707,97 @@ requirejs(["modules/trygonometric", "modules/output"], function() {
 
   countOwnKeys(weak_obj);
   countOwnKeys(weak_obj);
+
+  //17.15 Implementing Set() new data type:
+  const new_set = new Set();
+  new_set.add('red');
+  new_set.add('green');
+  new_set.add('blue');
+  console.log(new_set);
+  console.log(new_set.size);
+  new_set.clear();
+  console.log(new_set.size);
+
+  //17.16 Setting up a set:
+  console.log(new Set(['first', 'second', 'third']));
+  console.log(new Set().add('1_item').add('2_item').add('3_item'));
+
+  //17.17 Pitfall with creating new Sets():
+  console.log(Array.from(new Set(['pitfall-1', 'pitfall-2', 'pitfall-3'])));
+  console.log(Array.from(new Set('pitfall-1', 'pitfall-2', 'pitfall-3')));
+
+  //17.18 Iterating over elements of Set:
+  const iter_set = new Set(['iter-1', 'iter-2', 'iter-3']);
+  for (const x of iter_set) {
+    console.log(x);
+  }
+
+  //17.19 Converting a Set() to array:
+  const start_set = new Set(['Honda', 'Audi', 'Mercedes', 'Porsche']);
+  const final_arr = [...start_set];
+  console.log(final_arr);
+
+  //17.20 Converting array to Set():
+  const start_arr = [4, 2, 5, 3, 9, 0, 3];
+  const final_set = [...new Set(start_arr)];
+  console.log(final_set);
+
+  //17.21 Mapping over Set elements:
+  let map_set = new Set([5, 8, 8, 9, 0, 3]);
+  map_set = new Set([...map_set].map(x => x / 5.25));
+  console.log(map_set);
+
+  //17.22 Filtering over Set elements:
+  let filter_map = new Set([9, 5, 3, 2]);
+  filter_map = new Set([...filter_map].filter(x => (x % 2) == 0));
+  console.log(filter_map);
+
+  //17.23 Union operation for connect Sets:
+  const a_set = new Set([5, 6, 8]);
+  const b_set = new Set([9, 10, 11]);
+  const union = new Set([...a_set, ...b_set]);
+  console.log('Two sets after implemented union operation:');
+  console.log(union);
+
+  //17.24 Intersection operation for creating new array:
+  const a_int = new Set([6, 3, 2, 2, 1, 0, 1, 4]);
+  const b_int = new Set([5, 6, 3, 3, 9, 8, 1, 0]);
+  const intersection = new Set(
+    [...a_int].filter(x => b_int.has(x))
+  );
+  console.log(intersection);
+
+  //17.25 Difference operation for creating a new array:
+  const a_diff = new Set([5, 9, 3, 2]);
+  const b_diff = new Set([2, 5, 9, 0, 0, 4]);
+  const difference = new Set(
+    [...a_diff].filter(x => !b_diff.has(x))
+  );
+  console.log(difference);
+
+  //17.26 Handling sets as a Map():
+  const converted_map = new Map(a_diff.entries());
+  console.log(converted_map);
+
+  //17.27 Counting characters function implementation:
+  function countChars(chars) {
+    const charCounts = new Map();
+    chars.forEach(ch => {
+      ch = ch.toLowerCase();
+      const prevCount = charCounts.get(ch) || 0;
+      charCounts.set(ch, prevCount+1);
+    })
+    return charCounts;
+  }
+  console.log(countChars(['M', 'K', 'L', 'M', 'F', 'G', 'K', 'A', 'C']));
+
+  //18. Typed Arrays
+
+  //18.1 First easy initializing Typed Arrays:
+  const typedArray = new Uint8Array([34, 56, 31, 87, 90]);
+  console.log(typedArray.length);
+  typedArray[0] = 10;
+  const normalArray = [...typedArray];
+  console.log(normalArray);
+  const dataView = new DataView(typedArray.buffer);
+  console.log(dataView.getUint8(0));
