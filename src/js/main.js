@@ -753,3 +753,95 @@ requirejs(["modules/trygonometric", "modules/output"], function() {
   let filter_map = new Set([9, 5, 3, 2]);
   filter_map = new Set([...filter_map].filter(x => (x % 2) == 0));
   console.log(filter_map);
+
+  //17.23 Union operation for connect Sets:
+  const a_set = new Set([5, 6, 8]);
+  const b_set = new Set([9, 10, 11]);
+  const union = new Set([...a_set, ...b_set]);
+  console.log('Two sets after implemented union operation:');
+  console.log(union);
+
+  //17.24 Intersection operation for creating new array:
+  const a_int = new Set([6, 3, 2, 2, 1, 0, 1, 4]);
+  const b_int = new Set([5, 6, 3, 3, 9, 8, 1, 0]);
+  const intersection = new Set(
+    [...a_int].filter(x => b_int.has(x))
+  );
+  console.log(intersection);
+
+  //17.25 Difference operation for creating a new array:
+  const a_diff = new Set([5, 9, 3, 2]);
+  const b_diff = new Set([2, 5, 9, 0, 0, 4]);
+  const difference = new Set(
+    [...a_diff].filter(x => !b_diff.has(x))
+  );
+  console.log(difference);
+
+  //17.26 Handling sets as a Map():
+  const converted_map = new Map(a_diff.entries());
+  console.log(converted_map);
+
+  //17.27 Counting characters function implementation:
+  function countChars(chars) {
+    const charCounts = new Map();
+    chars.forEach(ch => {
+      ch = ch.toLowerCase();
+      const prevCount = charCounts.get(ch) || 0;
+      charCounts.set(ch, prevCount+1);
+    })
+    return charCounts;
+  }
+  console.log(countChars(['M', 'K', 'L', 'M', 'F', 'G', 'K', 'A', 'C']));
+
+  //18. Typed Arrays
+
+  //18.1 First easy initializing Typed Arrays:
+  const typedArray = new Uint8Array([34, 56, 31, 87, 90]);
+  console.log(typedArray.length);
+  typedArray[0] = 10;
+  const normalArray = [...typedArray];
+  console.log(normalArray);
+  const dataView = new DataView(typedArray.buffer);
+  console.log(dataView.getUint8(0));
+
+  //18.2 Testing different Endianess of TypedArrays:
+  /*
+  const BIG_ENDIAN = Symbol('BIG_ENDIAN');
+  const LITTLE_ENDIAN = Symbol('LITTLE_ENDIAN');
+  function getPlatformEndianness() {
+    const arr32 = Uint32Array.of(0x12345678);
+    const arr8 = new Uint8Array(arr32.buffer);
+    switch ((arr8[0]*0x1000000) + (arr8[1]*0x1000) + (arr8[2]*0x100) + (arr8\[3])) {
+      case 0x12345678:
+        return BIG_ENDIAN;
+      case 0x78563412:
+        return LITTLE_ENDIAN;
+      default:
+        throw new Error('Unknown endianess');
+    }
+  }
+  */
+
+  //18.3 Using negative indexes for accesing elements of arrays:
+  const ui8 = Uint8Array.of(0, 1, 2, 3);
+  console.log('Using slice method with negative indices:');
+  console.log(ui8.slice(-2));
+
+  //18.4 Using construction for-of for iterating over typed array:
+  for (const byte of ui8) {
+    console.log(byte);
+  }
+
+  //18.5 Converting normal array to the typed array:
+  const tarr = new Uint8Array([0, 1, 2]);
+  console.log(tarr);
+
+  //18.6 Converting typed array to the normal array:
+  const narr = Array.prototype.slice.call(tarr);
+  console.log(narr);
+  console.log([...tarr]);
+  console.log(Array.from(tarr));
+
+  //18.7 Converting between Typed Arrays types:
+  console.log(Int16Array.from(Int8Array.of(456, 896, 564, 124, 765), x => 2 * x));
+
